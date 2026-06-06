@@ -12,10 +12,14 @@ export type TrpcContext = {
 export async function createContext(
   opts: FetchCreateContextFnOptions,
 ): Promise<TrpcContext> {
+
+  console.log("CREATE CONTEXT CALLED");
+  console.log("ABOUT TO CALL GETDB");
+
   return {
-    req: opts.req,
-    resHeaders: opts.resHeaders,
-    db: getDb(),
-    supabase: getSupabase(),
-  };
+  req: opts.req,
+  resHeaders: opts.resHeaders,
+  db: null as any,
+  supabase: getSupabase(),
+};
 }

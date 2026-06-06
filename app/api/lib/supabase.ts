@@ -20,9 +20,16 @@ export function getSupabase() {
   }
 
   if (supabaseClient) return supabaseClient;
-  
-  const url = process.env.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+console.log("ENV FILE CHECK");
+console.log("SUPABASE URL =", process.env.VITE_SUPABASE_URL);
+console.log(
+  "KEY START =",
+  process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 20)
+);
+
+const url = process.env.VITE_SUPABASE_URL;
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   
   if (!url || !key) {
     console.error("❌ Supabase credentials not found!");

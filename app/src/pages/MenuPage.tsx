@@ -116,6 +116,7 @@ export default function MenuPage() {
 
   const { data: menuItems } = trpc.menu.getAll.useQuery();
   const { data: categories } = trpc.menu.getCategories.useQuery();
+
   const createOrder = trpc.order.create.useMutation();
 
   const { items, addItem, removeItem, updateQuantity, total, clearCart } = useCart();
@@ -138,11 +139,10 @@ export default function MenuPage() {
     groupedItems[item.category]!.push(item);
   });
 
-  const availableCategories =
-    categories
-      ?.filter((c: string) => categoryOrder.includes(c))
-      .sort((a: string, b: string) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)) || [];
-
+const availableCategories =
+  categories
+    ?.filter((c: string) => categoryOrder.includes(c))
+    .sort((a: string, b: string) => categoryOrder.indexOf(a) - categoryOrder.indexOf(b)) || [];
   const validateForm = () => {
     const errors: Record<string, string> = {};
     if (!formData.name.trim()) errors.name = "Ime je obavezno";

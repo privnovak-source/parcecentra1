@@ -31,6 +31,14 @@ function mapCategory(category: string): string {
 
 export const menuRouter = createRouter({
   getAll: publicQuery.query(async ({ ctx }) => {
+  console.log("🚨 MENU ROUTER VERSION 123 🚨");
+
+  const { count, error } = await ctx.supabase
+    .from("menu_items")
+    .select("*", { count: "exact", head: true });
+
+  console.log("COUNT =", count);
+  console.log("COUNT ERROR =", error);
     try {
       console.log("📋 Fetching all menu items from Supabase...");
       const { data, error } = await ctx.supabase
@@ -107,9 +115,12 @@ export const menuRouter = createRouter({
     try {
       console.log("📋 Fetching popular menu items...");
       const { data, error } = await ctx.supabase
-        .from("menu_items")
-        .select("*")
-        .limit(6);
+  .from("menu_items")
+  .select("*");
+
+console.log("RAW ERROR =", error);
+console.log("RAW DATA LENGTH =", data?.length);
+console.log("RAW DATA SAMPLE =", data?.[0]);
 
       if (error) {
         console.error("❌ Supabase error:", error);
